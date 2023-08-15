@@ -6,6 +6,7 @@ const server = express()
 const authRouter = require("./routes/Auth")
 const userRouter = require("./routes/User")
 const postRouter = require("./routes/Post")
+const uploadRouter = require("./routes/uploadRoute")
 
 
 //middleware
@@ -14,6 +15,7 @@ server.use(cors())
 server.use("/auth",authRouter.router)
 server.use("/user",userRouter.router)
 server.use("/post",postRouter.router)
+server.use("/upload",uploadRouter.router)
 
 
 

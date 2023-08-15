@@ -5,7 +5,6 @@ const {Schema} = mongoose
 const postSchema = new Schema({
     userId:{ type: String, required: true },
     desc:String,
-    likes:[],
     Image:String,
 
 },{timestamps:true})
