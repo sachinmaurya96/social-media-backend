@@ -8,6 +8,10 @@ const userRouter = require("./routes/User")
 const postRouter = require("./routes/Post")
 const uploadRouter = require("./routes/uploadRoute")
 
+//serve images file 
+server.use(express.static("public"))
+server.use("/images", express.static("public"))
+
 
 //middleware
 server.use(express.json())

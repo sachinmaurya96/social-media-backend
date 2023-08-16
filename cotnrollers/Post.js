@@ -84,9 +84,10 @@ exports.updatePost = async(req,res)=>{
 
  //getTimeLine Post
  exports.getTimeLinePosts = async (req,res)=>{
-    const userId = req.params.Id
+    const userId = req.params.id
+    console.log("userId",userId)
     try{
-        const currentUserPost = await Post.find({userId : userId})
+        const currentUserPost = await Post.find({userId:userId}).exec()
         const followingPosts = await User.aggregate([
             {
                 $match:{
@@ -108,9 +109,16 @@ exports.updatePost = async(req,res)=>{
                 }
             }
         ])
-        res.status(200).json(currentUserPost.concat(...followingPosts[0].followingPosts)).sort((a,b)=>{
+        res.setHeader('Content-Type', 'text/plain')
+       
+      await res.status(200).json(currentUserPost.concat(...followingPosts[0].followingPosts).sort((a,b)=>{
             return b.createdAt - a.createdAt
-        })
+        }))
+        
+      
+       
+
+      
     }catch(err){
         res.status(500).json(err)
 
