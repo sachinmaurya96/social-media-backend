@@ -6,6 +6,9 @@ const postSchema = new Schema({
     userId:{ type: String, required: true },
     desc:String,
     Image:String,
+    likes:[String],
+    comments:[String],
+    share:[String]
 
 },{timestamps:true})
 

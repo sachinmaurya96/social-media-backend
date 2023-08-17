@@ -16,8 +16,8 @@ exports.createPost = async(req,res)=>{
 exports.getPost = async(req,res)=>{
    const id = req.params.id
     try{
-        const post = await Post.findById(id).exec()
-        res.status(200).json(post)
+        const post = await Post.find({userId:id}).exec()
+      await  res.status(200).json(post)
     }catch(err){
         res.status(500).json(err)
     }
@@ -66,6 +66,7 @@ exports.updatePost = async(req,res)=>{
  exports.likePost = async (req,res)=>{
     const id = req.params.id
     const {userId}=req.body
+    
     try{
         const post = await Post.findById(id)
         if(!post.likes.includes(userId)){
@@ -85,7 +86,7 @@ exports.updatePost = async(req,res)=>{
  //getTimeLine Post
  exports.getTimeLinePosts = async (req,res)=>{
     const userId = req.params.id
-    console.log("userId",userId)
+   
     try{
         const currentUserPost = await Post.find({userId:userId}).exec()
         const followingPosts = await User.aggregate([
